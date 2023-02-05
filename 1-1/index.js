@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 //Using async code is essential when dealing with I/O operations
-const sendMail = async () => {
+const sendMail = async (mailOption) => {
   const EMAIL_USER = process.env.EMAIL_USER;
   const EMAIL_PASS = process.env.EMAIL_PASS;
   var transport = nodemailer.createTransport({
@@ -14,12 +14,6 @@ const sendMail = async () => {
       pass: EMAIL_PASS,
     },
   });
-  const mailOption = {
-    from: "nimabeheshtaein99@gmail.com",
-    to: "nima.maktab88@gmail.com",
-    subject: "Test " + new Date().toUTCString(),
-    text: "This is a testing email using Nodejs!",
-  };
   transport
     .sendMail(mailOption)
     .then((res) => {
@@ -30,4 +24,11 @@ const sendMail = async () => {
     });
 };
 
-sendMail();
+//example:
+const mailOption = {
+  from: "nimabeheshtaein99@gmail.com",
+  to: "nima.maktab88@gmail.com",
+  subject: "Test " + new Date().toUTCString(),
+  text: "This is a testing email using Nodejs!",
+};
+sendMail(mailOption);
