@@ -1,0 +1,14 @@
+{
+  "name": "nima_beheshtaein_hw12_maktab88",
+  "version": "1.0.0",
+  "description": "HW12",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nima Beheshtaein",
+  "license": "ISC",
+  "dependencies": {
+    "nodemailer": "^6.9.1"
+  }
+}
