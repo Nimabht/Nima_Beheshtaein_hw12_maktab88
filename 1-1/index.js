@@ -2,6 +2,7 @@
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
+//Using async code is essential when dealing with I/O operations
 const sendMail = async () => {
   const EMAIL_USER = process.env.EMAIL_USER;
   const EMAIL_PASS = process.env.EMAIL_PASS;
