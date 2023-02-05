@@ -9,6 +9,7 @@
   "author": "Nima Beheshtaein",
   "license": "ISC",
   "dependencies": {
+    "docx-pdf": "^0.0.1",
     "dotenv": "^16.0.3",
     "nodemailer": "^6.9.1"
   }
