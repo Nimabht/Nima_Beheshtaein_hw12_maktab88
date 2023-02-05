@@ -9,6 +9,7 @@
   "author": "Nima Beheshtaein",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.0.3",
     "nodemailer": "^6.9.1"
   }
 }
