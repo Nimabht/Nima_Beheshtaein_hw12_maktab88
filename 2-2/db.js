@@ -3,48 +3,30 @@ const _ = require("lodash");
 const path = "./user-data.json";
 
 const readAll = async () => {
-  pFs
-    .promisifiedReadFile(path, "utf8")
-    .then((res) => {
-      console.log(JSON.parse(res));
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  const result = await pFs.promisifiedReadFile(path, "utf8");
+  console.log(JSON.parse(result));
 };
 
 const create = async (data) => {
-  pFs
-    .promisifiedReadFile(path, "utf8")
-    .then((res) => {
-      const prevJson = JSON.parse(res);
-      if (_.findIndex(prevJson, (user) => user.uid == data.uid) !== -1) {
-        console.log("User already exists!");
-        return;
-      }
-      const newJson = [...prevJson, data];
-      pFs.promisifiedWriteFile(path, JSON.stringify(newJson, null, 4));
-      console.log(data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  const result = await pFs.promisifiedReadFile(path, "utf8");
+  const prevJson = JSON.parse(result);
+  if (_.findIndex(prevJson, (user) => user.uid == data.uid) !== -1) {
+    console.log("User already exists!");
+    return;
+  }
+  const newJson = [...prevJson, data];
+  await pFs.promisifiedWriteFile(path, JSON.stringify(newJson, null, 4));
+  console.log(data);
 };
 
 const read = async (id) => {
-  pFs
-    .promisifiedReadFile(path, "utf8")
-    .then((res) => {
-      const selectedUser = JSON.parse(res).filter((user) => user.uid === id)[0];
-      if (selectedUser) {
-        console.log(selectedUser);
-      } else {
-        console.log("User not found!");
-      }
-    })
-    .catch((err) => {
-      throw err;
-    });
+  const users = await pFs.promisifiedReadFile(path, "utf8");
+  const selectedUser = JSON.parse(users).filter((user) => user.uid === id)[0];
+  if (selectedUser) {
+    console.log(selectedUser);
+  } else {
+    console.log("User not found!");
+  }
 };
 
 const update = async (id, data) => {
@@ -52,40 +34,28 @@ const update = async (id, data) => {
     console.log("Invalid use of update method");
     return;
   }
-  pFs
-    .promisifiedReadFile(path, "utf8")
-    .then((res) => {
-      const prevJson = JSON.parse(res);
-      const newJson = _.map(prevJson, (user) => {
-        if (user.uid === id) {
-          console.log("User updated!");
-          return data;
-        }
-        return user;
-      });
-      pFs.promisifiedWriteFile(path, JSON.stringify(newJson, null, 4));
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  const users = await pFs.promisifiedReadFile(path, "utf8");
+  const prevJson = JSON.parse(users);
+  const newJson = _.map(prevJson, (user) => {
+    if (user.uid === id) {
+      console.log("User updated!");
+      return data;
+    }
+    return user;
+  });
+  await pFs.promisifiedWriteFile(path, JSON.stringify(newJson, null, 4));
 };
 
 const remove = async (id) => {
-  pFs
-    .promisifiedReadFile(path, "utf8")
-    .then((res) => {
-      const prevJson = JSON.parse(res);
-      const newJson = prevJson.filter((user) => user.uid !== id);
-      if (prevJson.length === newJson.length) {
-        console.log("User not found!");
-        return;
-      }
-      pFs.promisifiedWriteFile(path, JSON.stringify(newJson, null, 4));
-      console.log("User removed!");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  const users = await pFs.promisifiedReadFile(path, "utf8");
+  const prevJson = JSON.parse(users);
+  const newJson = prevJson.filter((user) => user.uid !== id);
+  if (prevJson.length === newJson.length) {
+    console.log("User not found!");
+    return;
+  }
+  await pFs.promisifiedWriteFile(path, JSON.stringify(newJson, null, 4));
+  console.log("User removed!");
 };
 
 module.exports = {
