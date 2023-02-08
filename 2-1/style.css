@@ -1,0 +1,45 @@
+body {
+  background-image: url(./images/bg.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+.pagination-nav {
+  margin: -30px auto 2rem auto;
+  width: min-content;
+}
+.pagination li {
+  cursor: pointer;
+}
+.w-min-60 {
+  min-width: 60rem;
+}
+.modal-wrapper {
+  background-color: rgba(0, 0, 0, 0.652);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+}
+#modal {
+  background-color: rgb(230, 255, 255);
+  width: 640px;
+  margin: 4rem auto;
+  padding: 1rem;
+  border: 1px black solid;
+  border-radius: 5px;
+  align-items: center;
+}
+.button-wrapper {
+  display: flex;
+  width: 34%;
+  justify-content: center;
+  column-gap: 5px;
+  margin: 2rem auto;
+}
